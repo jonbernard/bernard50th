@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   ActionIcon,
   Button,
@@ -34,6 +34,7 @@ export function RsvpForm() {
   const [nameErrors, setNameErrors] = useState<string[]>([""]);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const updateName = (index: number, value: string) => {
     setNames((prev) => prev.map((n, i) => (i === index ? value : n)));
@@ -41,7 +42,12 @@ export function RsvpForm() {
   };
 
   const addGuest = () => {
-    setNames((prev) => [...prev, ""]);
+    setNames((prev) => {
+      const next = [...prev, ""];
+      // Focus the new input after React re-renders
+      setTimeout(() => inputRefs.current[next.length - 1]?.focus(), 0);
+      return next;
+    });
     setNameErrors((prev) => [...prev, ""]);
   };
 
@@ -128,9 +134,16 @@ export function RsvpForm() {
             {names.map((name, index) => (
               <Group key={index} gap="xs" align="flex-start">
                 <TextInput
+                  ref={(el) => { inputRefs.current[index] = el; }}
                   placeholder={index === 0 ? "Your name" : `Guest ${index + 1}`}
                   value={name}
                   onChange={(e) => updateName(index, e.currentTarget.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      addGuest();
+                    }
+                  }}
                   error={nameErrors[index] || undefined}
                   size="md"
                   style={{ flex: 1 }}
