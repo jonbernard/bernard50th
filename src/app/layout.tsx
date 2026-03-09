@@ -42,11 +42,11 @@ const theme = createTheme({
 
 export const metadata: Metadata = {
 	metadataBase: new URL('https://bernard50th.com'),
-	title: 'Tom & Jane Bernard — 50 Years!',
+	title: 'Tom & Jane Bernard — Celebrating 50 Years!',
 	description:
 		"Join us to celebrate Tom & Jane Bernard's 50th wedding anniversary on Sunday, June 7th, 2026 from 1–5pm at The Center at Stonehill Village in Xenia, OH.",
 	openGraph: {
-		title: 'Tom & Jane Bernard — 50 Years!',
+		title: 'Tom & Jane Bernard — Celebrating 50 Years!',
 		description:
 			"Join us to celebrate Tom & Jane Bernard's 50th wedding anniversary on Sunday, June 7th, 2026 from 1–5pm at The Center at Stonehill Village in Xenia, OH.",
 		url: 'https://bernard50th.com',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: 'summary_large_image',
-		title: 'Tom & Jane Bernard — 50 Years!',
+		title: 'Tom & Jane Bernard — Celebrating 50 Years!',
 		description:
 			"Join us to celebrate Tom & Jane Bernard's 50th wedding anniversary on Sunday, June 7th, 2026.",
 		images: ['/images/bernard-1.jpg'],
