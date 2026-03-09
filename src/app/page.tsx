@@ -193,17 +193,17 @@ export default function Home() {
 
 					<div className='h-px bg-brown-light my-[72px] mx-auto opacity-[0.35]' />
 
-					<p className='font-cormorant text-[clamp(1rem,3vw,1.5rem)] font-medium italic text-brown leading-normal text-center mt-0 mb-7'>
+					<p className='font-cormorant text-[clamp(1.45rem,3vw,1.6rem)] font-medium italic text-brown leading-normal text-center mt-0 mb-7'>
 						Hors D&apos;oeuvres, Refreshments, and Desserts will be served.
 					</p>
 
-					<p className='font-cormorant text-[clamp(1rem,3vw,1.5rem)] font-medium italic text-brown leading-normal text-center mt-0 mb-7'>
+					<p className='font-cormorant text-[clamp(1.45rem,3vw,1.6rem)] font-medium italic text-brown leading-normal text-center mt-0 mb-7'>
 						This party will be an Open House from 1pm - 5pm. You are invited to be there the entire
 						time, or as much as you are able.
 					</p>
 
 					{/* No gifts */}
-					<p className='font-cormorant text-[1.1rem] italic text-brown text-center tracking-[0.04em] m-0'>
+					<p className='font-cormorant text-[clamp(1.1rem,3vw,1.25rem)] font-medium italic text-brown leading-normal text-center mt-0 mb-7'>
 						✦&nbsp; Please NO GIFTS. If you would like to bring a card, that will gladly be
 						received. &nbsp;✦
 					</p>
