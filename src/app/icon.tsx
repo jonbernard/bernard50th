@@ -9,37 +9,24 @@ export default function Icon() {
       style={{
         width: 64,
         height: 64,
-        background: "#f5f0e8",
-        border: "3px solid #3d2b1f",
+        background: "#3d2b1f",
         borderRadius: 8,
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 1,
       }}
     >
-      <div
+      <span
         style={{
-          color: "#c9a26a",
-          fontSize: 10,
-          lineHeight: 1,
-          letterSpacing: "3px",
-        }}
-      >
-        *&nbsp;*
-      </div>
-      <div
-        style={{
-          color: "#3d2b1f",
+          color: "#f5f0e8",
           fontSize: 26,
-          fontWeight: 800,
+          fontWeight: 900,
           lineHeight: 1,
-          letterSpacing: "-1px",
+          letterSpacing: "-0.5px",
         }}
       >
-        50
-      </div>
+        T&amp;J
+      </span>
     </div>,
     { ...size }
   );

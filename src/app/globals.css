@@ -12,6 +12,10 @@
   --paper: #d8c9b0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--cream);
   color: var(--brown);

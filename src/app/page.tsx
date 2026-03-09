@@ -1,5 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import { RsvpForm } from "./components/RsvpForm";
+import { RsvpScrollButton } from "./components/RsvpScrollButton";
 
 // ─── Photo frame / stub ──────────────────────────────────────────────────────
 
@@ -161,7 +162,7 @@ export default function Home() {
             <p style={{ margin: 0 }}>1:00pm – 5:00pm</p>
             <p style={{ margin: 0 }}>The Center at Stonehill Village</p>
             <p style={{ margin: 0 }}>1300 Shorthill Dr,</p>
-            <p style={{ margin: 0 }}>Xenia, OH 45385</p>
+            <p style={{ lineHeight: 1, margin: 0 }}>Xenia, OH 45385</p>
             <p
               style={{
                 margin: "6px 0 0",
@@ -217,7 +218,7 @@ export default function Home() {
       <section
         style={{
           backgroundColor: "#f8f5f0",
-          padding: "60px 32px 68px",
+          padding: "60px 32px 90px",
           position: "relative",
           overflow: "hidden",
         }}
@@ -280,7 +281,7 @@ export default function Home() {
           <p
             style={{
               fontFamily: "var(--font-cormorant)",
-              fontWeight: "bold",
+              fontWeight: 700,
               fontSize: "1.05rem",
               letterSpacing: "0.07em",
               textTransform: "uppercase",
@@ -296,6 +297,44 @@ export default function Home() {
             commitment and endurance that has shaped all our lives.
           </p>
 
+          <div
+            style={{
+              height: 1,
+              backgroundColor: "var(--brown-light)",
+              margin: "72px auto",
+              opacity: 0.35,
+            }}
+          />
+          <p
+            style={{
+              fontFamily: "var(--font-cormorant)",
+              fontSize: "clamp(1rem, 3vw, 1.5rem)",
+              fontWeight: 500,
+              fontStyle: "italic",
+              color: "var(--brown)",
+              lineHeight: 1.5,
+              textAlign: "center",
+              margin: "0 0 28px",
+            }}
+          >
+            Hors D'oeuvres, Refreshments, and Desserts will be served.
+          </p>
+          <p
+            style={{
+              fontFamily: "var(--font-cormorant)",
+              fontSize: "clamp(1rem, 3vw, 1.5rem)",
+              fontWeight: 500,
+              fontStyle: "italic",
+              color: "var(--brown)",
+              lineHeight: 1.5,
+              textAlign: "center",
+              margin: "0 0 28px",
+            }}
+          >
+            This party will be an Open House from 1pm - 5pm. You are invited to
+            be there the entire time, or as much as you are able.
+          </p>
+
           {/* No gifts */}
           <p
             style={{
@@ -308,13 +347,15 @@ export default function Home() {
               margin: 0,
             }}
           >
-            ✦&nbsp; Please NO GIFTS &nbsp;~&nbsp; Cards gladly received. &nbsp;✦
+            ✦&nbsp; Please NO GIFTS. If you would like to bring a card, that
+            will gladly be received. &nbsp;✦
           </p>
         </div>
       </section>
 
       {/* ── RSVP Section ── */}
       <section
+        id="rsvp"
         style={{
           backgroundColor: "var(--cream)",
           padding: "60px 24px 80px",
@@ -347,7 +388,7 @@ export default function Home() {
             }}
           >
             Kindly reply by{" "}
-            <strong style={{ color: "var(--brown)" }}>[Deadline Date]</strong>
+            <strong style={{ color: "var(--brown)" }}>June 4th</strong>
           </p>
 
           <RsvpForm />
@@ -376,6 +417,8 @@ export default function Home() {
           2026
         </p>
       </footer>
+
+      <RsvpScrollButton />
     </main>
   );
 }
