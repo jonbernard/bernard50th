@@ -57,7 +57,7 @@ export function RsvpForm() {
 
   const validate = () => {
     const errors = names.map((n) =>
-      n.trim().length === 0 ? "Please enter a name" : ""
+      n.trim().length === 0 ? "Please enter a name" : "",
     );
     setNameErrors(errors);
     return errors.every((e) => e === "");
@@ -96,6 +96,19 @@ export function RsvpForm() {
         <Text className="font-cormorant text-[1.1rem] italic text-brown-medium">
           Thank you for your RSVP. We look forward to celebrating with you.
         </Text>
+        <Button
+          onClick={() => {
+            setSubmitted(false);
+            setNames([""]);
+            setDietary("");
+            setNameErrors([""]);
+          }}
+          size="sm"
+          color="brown"
+          className="font-playfair tracking-[0.12em] font-semibold mt-16"
+        >
+          Add another guest
+        </Button>
       </div>
     );
   }
@@ -155,7 +168,7 @@ export function RsvpForm() {
             size="sm"
             mt="xs"
             color="brown"
-            className="font-cormorant text-base italic tracking-[0.04em] !pl-0"
+            className="font-cormorant text-base italic tracking-[0.04em]"
           >
             + Add another guest
           </Button>

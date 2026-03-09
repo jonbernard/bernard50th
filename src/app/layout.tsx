@@ -40,9 +40,33 @@ const theme = createTheme({
 });
 
 export const metadata: Metadata = {
-  title: "Tom & Jane Bernard — 50th Anniversary",
+  metadataBase: new URL("https://bernard50th.com"),
+  title: "Tom & Jane Bernard — 50 Years!",
   description:
-    "Join us to celebrate Tom & Jane Bernard's 50th wedding anniversary on Sunday, June 7th, 2026.",
+    "Join us to celebrate Tom & Jane Bernard's 50th wedding anniversary on Sunday, June 7th, 2026 from 1–5pm at The Center at Stonehill Village in Xenia, OH.",
+  openGraph: {
+    title: "Tom & Jane Bernard — 50 Years!",
+    description:
+      "Join us to celebrate Tom & Jane Bernard's 50th wedding anniversary on Sunday, June 7th, 2026 from 1–5pm at The Center at Stonehill Village in Xenia, OH.",
+    url: "https://bernard50th.com",
+    siteName: "Tom & Jane Bernard 50th Anniversary",
+    images: [
+      {
+        url: "/images/bernard-1.jpg",
+        alt: "Tom & Jane Bernard — Wedding Day 1976",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tom & Jane Bernard — 50 Years!",
+    description:
+      "Join us to celebrate Tom & Jane Bernard's 50th wedding anniversary on Sunday, June 7th, 2026.",
+    images: ["/images/bernard-1.jpg"],
+  },
+  themeColor: "#3d2b1f",
 };
 
 export default function RootLayout({
