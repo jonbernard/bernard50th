@@ -22,11 +22,16 @@ const mantineInputStyles = {
 
 export function RsvpForm() {
 	const [names, setNames] = useState<string[]>(['']);
+	const [email, setEmail] = useState('');
+	const [emailError, setEmailError] = useState('');
 	const [dietary, setDietary] = useState('');
 	const [nameErrors, setNameErrors] = useState<string[]>(['']);
 	const [submitted, setSubmitted] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+	const isFormValid =
+		names.every((n) => n.trim().length > 0) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
 	const updateName = (index: number, value: string) => {
 		setNames((prev) => prev.map((n, i) => (i === index ? value : n)));
@@ -48,9 +53,19 @@ export function RsvpForm() {
 	};
 
 	const validate = () => {
-		const errors = names.map((n) => (n.trim().length === 0 ? 'Please enter a name' : ''));
-		setNameErrors(errors);
-		return errors.every((e) => e === '');
+		const nameErrs = names.map((n) => (n.trim().length === 0 ? 'Please enter a name' : ''));
+		setNameErrors(nameErrs);
+
+		const emailTrimmed = email.trim();
+		let emailErr = '';
+		if (emailTrimmed.length === 0) {
+			emailErr = 'Please enter your email address';
+		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrimmed)) {
+			emailErr = 'Please enter a valid email address';
+		}
+		setEmailError(emailErr);
+
+		return nameErrs.every((e) => e === '') && emailErr === '';
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -62,7 +77,7 @@ export function RsvpForm() {
 			const res = await fetch('/api/rsvp', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ names, dietary }),
+				body: JSON.stringify({ names, email: email.trim(), dietary }),
 			});
 			if (!res.ok) throw new Error('Submission failed');
 			setSubmitted(true);
@@ -90,6 +105,8 @@ export function RsvpForm() {
 					onClick={() => {
 						setSubmitted(false);
 						setNames(['']);
+						setEmail('');
+						setEmailError('');
 						setDietary('');
 						setNameErrors(['']);
 					}}
@@ -163,6 +180,22 @@ export function RsvpForm() {
 					</Button>
 				</div>
 
+				{/* Email */}
+				<TextInput
+					label='Email Address'
+					placeholder='your@email.com'
+					type='email'
+					size='md'
+					required
+					value={email}
+					onChange={(e) => {
+						setEmail(e.currentTarget.value);
+						setEmailError('');
+					}}
+					error={emailError || undefined}
+					styles={mantineInputStyles}
+				/>
+
 				{/* Dietary restrictions */}
 				<Textarea
 					label='Dietary Restrictions / Notes'
@@ -180,7 +213,8 @@ export function RsvpForm() {
 					loading={loading}
 					size='md'
 					color='brown'
-					className='font-playfair tracking-[0.12em] font-semibold'>
+					disabled={!isFormValid}
+				className='font-playfair tracking-[0.12em] font-semibold'>
 					SEND RSVP
 				</Button>
 			</Stack>

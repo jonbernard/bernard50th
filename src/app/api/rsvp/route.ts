@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
 	try {
-		const { names, dietary } = await request.json();
+		const { names, email, dietary } = await request.json();
 
 		if (
 			!Array.isArray(names) ||
@@ -29,13 +29,14 @@ export async function POST(request: Request) {
 
 		await sheets.spreadsheets.values.append({
 			spreadsheetId: process.env.GOOGLE_SHEET_ID,
-			range: 'Sheet1!A:E',
+			range: 'Sheet1!A:F',
 			valueInputOption: 'USER_ENTERED',
 			requestBody: {
 				values: [
 					[
 						cleanedNames.join(', '),
 						totalGuests,
+						typeof email === 'string' ? email.trim() : '',
 						typeof dietary === 'string' ? dietary.trim() : '',
 						new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }),
 					],

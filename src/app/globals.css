@@ -129,7 +129,9 @@ body {
 }
 
 .story-photo-a {
-	width: 280px;
+	@apply mt-10 mr-6;
+
+	width: 320px;
 }
 
 .story-photo-b {
@@ -155,6 +157,10 @@ body {
 	.invite-details {
 		text-align: center !important;
 		white-space: normal;
+	}
+
+	.story-photo-a {
+		@apply mt-8 mr-0;
 	}
 
 	.story-photo-a,

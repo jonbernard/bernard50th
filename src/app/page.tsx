@@ -57,7 +57,7 @@ export default function Home() {
 	return (
 		<main className='bg-cream min-h-screen'>
 			{/* ── Collage Section (top 3 photos) ── */}
-			<section className='collage-bg bg-paper-tan pt-10 px-8 pb-[52px]'>
+			<section className='collage-bg bg-paper-tan pt-12 px-8 pb-10'>
 				<div className='max-w-[700px] mx-auto'>
 					<div className='collage-top-grid'>
 						<div className='collage-large-photo'>
@@ -85,8 +85,8 @@ export default function Home() {
 			</section>
 
 			{/* ── Invitation Text Section ── */}
-			<section className='bg-cream pt-14 px-8 pb-[52px]'>
-				<div className='invite-grid max-w-[900px] mx-auto'>
+			<section className='bg-cream px-8 py-24'>
+				<div className='invite-grid max-w-[1000px] mx-auto'>
 					{/* Left: headline */}
 					<div className='text-center'>
 						<div className='section-rule mb-[14px]'>
@@ -107,13 +107,18 @@ export default function Home() {
 					</div>
 
 					{/* Right: event details */}
-					<div className='invite-details font-cormorant text-[1.15rem] italic text-brown leading-[1.9]'>
-						<p className='m-0 font-semibold'>Sunday, June 7th, 2026</p>
-						<p className='m-0'>1:00pm – 5:00pm</p>
-						<p className='m-0'>The Center at Stonehill Village</p>
-						<p className='m-0'>1300 Shorthill Dr,</p>
-						<p className='m-0 leading-[1]'>Xenia, OH 45385</p>
-						<p className='mt-[6px] mb-0 mx-0 text-[1rem] text-brown-medium'>bernard50th.com</p>
+					<div className='invite-details font-cormorant text-[1.25rem] italic text-brown leading-6 text-xl'>
+						<p className='m-0 text-2xl font-semibold'>Sunday, June 7th, 2026</p>
+						<p className='mt-0 mb-8 text-2xl'>1:00pm – 5:00pm</p>
+						<a
+							href='https://maps.google.com/?q=The+Center+at+Stonehill+Village,+1300+Shorthill+Dr,+Xenia,+OH+45385'
+							target='_blank'
+							rel='noopener noreferrer'
+							className='text-brown underline decoration-dotted underline-offset-2 hover:text-brown-medium transition-colors duration-150'>
+							<p className='m-0'>The Center at Stonehill Village</p>
+							<p className='m-0'>1300 Shorthill Dr,</p>
+							<p className='m-0'>Xenia, OH 45385</p>
+						</a>
 					</div>
 				</div>
 			</section>
@@ -152,7 +157,7 @@ export default function Home() {
 				<Sparkle style={{ bottom: 76, left: 60 }} />
 				<Sparkle style={{ bottom: 76, right: 60 }} />
 
-				<div className='max-w-[720px] mx-auto relative z-[1]'>
+				<div className='max-w-[720px] mx-auto relative z-1'>
 					{/* Two photos from back of invite */}
 					<div className='story-photos'>
 						<div className='story-photo-a'>
@@ -188,11 +193,11 @@ export default function Home() {
 
 					<div className='h-px bg-brown-light my-[72px] mx-auto opacity-[0.35]' />
 
-					<p className='font-cormorant text-[clamp(1rem,3vw,1.5rem)] font-medium italic text-brown leading-[1.5] text-center mt-0 mb-7'>
+					<p className='font-cormorant text-[clamp(1rem,3vw,1.5rem)] font-medium italic text-brown leading-normal text-center mt-0 mb-7'>
 						Hors D&apos;oeuvres, Refreshments, and Desserts will be served.
 					</p>
 
-					<p className='font-cormorant text-[clamp(1rem,3vw,1.5rem)] font-medium italic text-brown leading-[1.5] text-center mt-0 mb-7'>
+					<p className='font-cormorant text-[clamp(1rem,3vw,1.5rem)] font-medium italic text-brown leading-normal text-center mt-0 mb-7'>
 						This party will be an Open House from 1pm - 5pm. You are invited to be there the entire
 						time, or as much as you are able.
 					</p>
