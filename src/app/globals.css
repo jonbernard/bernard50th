@@ -2,23 +2,35 @@
 @import "@mantine/notifications/styles.css";
 @import "tailwindcss";
 
-:root {
-  --cream: #f5f0e8;
-  --cream-dark: #ede8df;
-  --brown: #3d2b1f;
-  --brown-medium: #6b4c35;
-  --brown-light: #9b8a70;
-  --tan: #c8a87a;
-  --paper: #d8c9b0;
+/* ── Design tokens (also drives Tailwind utilities) ── */
+@theme {
+  --color-cream: #f5f0e8;
+  --color-cream-dark: #ede8df;
+  --color-brown: #3d2b1f;
+  --color-brown-medium: #6b4c35;
+  --color-brown-light: #9b8a70;
+  --color-gold: #c9a26a;
+  --color-paper-tan: #c9b49a;
+  --color-paper-light: #f8f5f0;
 }
 
+/* ── Custom font utilities ── */
+@utility font-playfair {
+  font-family: var(--font-playfair);
+}
+
+@utility font-cormorant {
+  font-family: var(--font-cormorant);
+}
+
+/* ── Base ── */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--cream);
-  color: var(--brown);
+  background-color: var(--color-cream);
+  color: var(--color-brown);
 }
 
 /* ── Photo frame ── */
@@ -52,7 +64,7 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-  color: var(--brown-medium);
+  color: var(--color-brown-medium);
 }
 
 .section-rule::before,
@@ -60,8 +72,19 @@ body {
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--brown-light);
+  background: var(--color-brown-light);
   opacity: 0.7;
+}
+
+/* ── Collage background texture ── */
+.collage-bg {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.03) 10px,
+    rgba(255, 255, 255, 0.03) 20px
+  );
 }
 
 /* ── Collage grids ── */

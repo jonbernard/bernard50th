@@ -12,18 +12,18 @@ import {
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 
-const inputStyles = {
+const mantineInputStyles = {
   label: {
     fontFamily: "var(--font-cormorant)",
     fontSize: "1rem",
-    color: "var(--brown)",
+    color: "var(--color-brown)",
     fontWeight: 600,
     letterSpacing: "0.05em",
   },
   input: {
     fontFamily: "var(--font-cormorant)",
     fontSize: "1.1rem",
-    borderColor: "var(--brown-light)",
+    borderColor: "var(--color-brown-light)",
     backgroundColor: "white",
   },
 };
@@ -44,7 +44,6 @@ export function RsvpForm() {
   const addGuest = () => {
     setNames((prev) => {
       const next = [...prev, ""];
-      // Focus the new input after React re-renders
       setTimeout(() => inputRefs.current[next.length - 1]?.focus(), 0);
       return next;
     });
@@ -90,25 +89,11 @@ export function RsvpForm() {
 
   if (submitted) {
     return (
-      <div style={{ textAlign: "center", padding: "24px 0" }}>
-        <Text
-          style={{
-            fontFamily: "var(--font-playfair)",
-            fontSize: "1.5rem",
-            color: "var(--brown)",
-            marginBottom: 12,
-          }}
-        >
+      <div className="text-center py-6">
+        <Text className="font-playfair text-[1.5rem] text-brown mb-3">
           We&apos;ll see you there!
         </Text>
-        <Text
-          style={{
-            fontFamily: "var(--font-cormorant)",
-            fontSize: "1.1rem",
-            fontStyle: "italic",
-            color: "var(--brown-medium)",
-          }}
-        >
+        <Text className="font-cormorant text-[1.1rem] italic text-brown-medium">
           Thank you for your RSVP. We look forward to celebrating with you.
         </Text>
       </div>
@@ -122,11 +107,7 @@ export function RsvpForm() {
         <div>
           <Text
             component="label"
-            style={{
-              ...inputStyles.label,
-              display: "block",
-              marginBottom: 8,
-            }}
+            className="font-cormorant text-base text-brown font-semibold tracking-[0.05em] block mb-2"
           >
             Attendee Names
           </Text>
@@ -134,7 +115,9 @@ export function RsvpForm() {
             {names.map((name, index) => (
               <Group key={index} gap="xs" align="flex-start">
                 <TextInput
-                  ref={(el) => { inputRefs.current[index] = el; }}
+                  ref={(el) => {
+                    inputRefs.current[index] = el;
+                  }}
                   placeholder={index === 0 ? "Your name" : `Guest ${index + 1}`}
                   value={name}
                   onChange={(e) => updateName(index, e.currentTarget.value)}
@@ -147,7 +130,7 @@ export function RsvpForm() {
                   error={nameErrors[index] || undefined}
                   size="md"
                   style={{ flex: 1 }}
-                  styles={{ input: inputStyles.input }}
+                  styles={{ input: mantineInputStyles.input }}
                   aria-label={`Attendee ${index + 1}`}
                 />
                 {names.length > 1 && (
@@ -158,7 +141,7 @@ export function RsvpForm() {
                     size="lg"
                     mt={4}
                     aria-label="Remove guest"
-                    style={{ color: "var(--brown-light)" }}
+                    className="text-brown-light"
                   >
                     ×
                   </ActionIcon>
@@ -172,13 +155,7 @@ export function RsvpForm() {
             size="sm"
             mt="xs"
             color="brown"
-            style={{
-              fontFamily: "var(--font-cormorant)",
-              fontSize: "1rem",
-              fontStyle: "italic",
-              letterSpacing: "0.04em",
-              paddingLeft: 0,
-            }}
+            className="font-cormorant text-base italic tracking-[0.04em] !pl-0"
           >
             + Add another guest
           </Button>
@@ -191,7 +168,7 @@ export function RsvpForm() {
           size="md"
           autosize
           minRows={2}
-          styles={inputStyles}
+          styles={mantineInputStyles}
           value={dietary}
           onChange={(e) => setDietary(e.currentTarget.value)}
         />
@@ -201,11 +178,7 @@ export function RsvpForm() {
           loading={loading}
           size="md"
           color="brown"
-          style={{
-            fontFamily: "var(--font-playfair)",
-            letterSpacing: "0.12em",
-            fontWeight: 600,
-          }}
+          className="font-playfair tracking-[0.12em] font-semibold"
         >
           SEND RSVP
         </Button>
