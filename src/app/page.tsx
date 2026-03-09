@@ -95,7 +95,7 @@ export default function Home() {
 							</span>
 						</div>
 
-						<h1 className='font-playfair text-[clamp(2rem,4.5vw,3.2rem)] font-extrabold tracking-[0.06em] text-brown mt-0 mb-[6px] uppercase leading-[1.1]'>
+						<h1 className='font-playfair text-[clamp(1.5rem,4.75vw,3.2rem)] font-extrabold tracking-[0.06em] text-brown mt-0 mb-[6px] uppercase leading-[1.1]'>
 							Tom &amp; Jane Bernard
 						</h1>
 

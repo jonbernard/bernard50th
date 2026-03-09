@@ -74,6 +74,8 @@ body {
 	height: 1px;
 	background: var(--color-brown-light);
 	opacity: 0.7;
+	position: relative;
+	top: 3px;
 }
 
 /* ── Collage background texture ── */
@@ -110,7 +112,7 @@ body {
 .invite-grid {
 	display: grid;
 	grid-template-columns: 1fr auto;
-	gap: 32px 56px;
+	gap: 32px 84px;
 	align-items: center;
 }
 
