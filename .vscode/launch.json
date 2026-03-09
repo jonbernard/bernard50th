@@ -1,0 +1,43 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Next.js: debug server-side",
+			"type": "node-terminal",
+			"request": "launch",
+			"command": "npm run dev"
+		},
+		{
+			"name": "Next.js: debug full stack",
+			"type": "node",
+			"request": "launch",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": ["run", "dev:debug"],
+			"console": "integratedTerminal",
+			"skipFiles": ["<node_internals>/**"],
+			"env": {
+				"NODE_OPTIONS": "--inspect"
+			}
+		},
+		{
+			"name": "Attach to Next.js (Port 9229)",
+			"type": "node",
+			"request": "attach",
+			"port": 9229,
+			"restart": true,
+			"skipFiles": ["<node_internals>/**"],
+			"resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"]
+		},
+		{
+			"name": "Attach to Next.js (Port 9229 - Alternative)",
+			"type": "node",
+			"request": "attach",
+			"port": 9229,
+			"protocol": "inspector",
+			"restart": true,
+			"skipFiles": ["<node_internals>/**"],
+			"sourceMaps": true,
+			"resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"]
+		}
+	]
+}

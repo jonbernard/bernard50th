@@ -1,0 +1,20 @@
+{
+	"prettier.$schema": "https://json.schemastore.org/prettierrc",
+	"prettier.semi": true,
+	"prettier.tabWidth": 2,
+	"prettier.useTabs": true,
+	"prettier.jsxSingleQuote": true,
+	"prettier.singleAttributePerLine": true,
+	"prettier.singleQuote": true,
+	"prettier.printWidth": 100,
+	"prettier.bracketSameLine": true,
+	"prettier.trailingComma": "all",
+	"editor.formatOnSave": true,
+	"editor.tabSize": 2,
+	"cSpell.words": ["Formbot"],
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"biome.enabled": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.biome": "explicit"
+	}
+}
