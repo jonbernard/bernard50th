@@ -7,6 +7,8 @@ export async function POST(request: Request) {
 	try {
 		const { names, email, dietary, isAttending } = await request.json();
 
+		console.info('Processing RSVP:', names, email, dietary, isAttending);
+
 		if (
 			!Array.isArray(names) ||
 			names.length === 0 ||
@@ -48,6 +50,8 @@ export async function POST(request: Request) {
 		});
 
 		await sendEmail(cleanedNames, isAttending);
+
+		console.info('RSVP processed successfully');
 
 		return NextResponse.json({ success: true });
 	} catch (error) {
