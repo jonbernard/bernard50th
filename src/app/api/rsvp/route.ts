@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 		}
 
 		const cleanedNames = (names as string[]).map((n) => n.trim());
-		const totalGuests = cleanedNames.length;
+		const totalGuests = isAttending ? cleanedNames.length : 0;
 
 		const auth = new google.auth.JWT({
 			email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
