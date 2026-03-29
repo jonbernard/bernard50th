@@ -1,9 +1,11 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
+import { sendEmail } from './email';
+
 export async function POST(request: Request) {
 	try {
-		const { names, email, dietary } = await request.json();
+		const { names, email, dietary, isAttending } = await request.json();
 
 		if (
 			!Array.isArray(names) ||
@@ -38,11 +40,14 @@ export async function POST(request: Request) {
 						totalGuests,
 						typeof email === 'string' ? email.trim() : '',
 						typeof dietary === 'string' ? dietary.trim() : '',
+						isAttending ? 'yes' : 'no',
 						new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }),
 					],
 				],
 			},
 		});
+
+		await sendEmail(cleanedNames, isAttending);
 
 		return NextResponse.json({ success: true });
 	} catch (error) {

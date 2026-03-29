@@ -1,6 +1,16 @@
 'use client';
 
-import { ActionIcon, Button, Group, Stack, Text, Textarea, TextInput } from '@mantine/core';
+import {
+	ActionIcon,
+	Button,
+	Group,
+	Radio,
+	RadioGroup,
+	Stack,
+	Text,
+	Textarea,
+	TextInput,
+} from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { useRef, useState } from 'react';
 
@@ -26,12 +36,14 @@ export function RsvpForm() {
 	const [emailError, setEmailError] = useState('');
 	const [dietary, setDietary] = useState('');
 	const [nameErrors, setNameErrors] = useState<string[]>(['']);
+	const [isAttending, setIsAttending] = useState(true);
 	const [submitted, setSubmitted] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
 	const isFormValid =
-		names.every((n) => n.trim().length > 0) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+		names.every((n) => n.trim().length > 0) &&
+		(!isAttending || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()));
 
 	const updateName = (index: number, value: string) => {
 		setNames((prev) => prev.map((n, i) => (i === index ? value : n)));
@@ -57,10 +69,12 @@ export function RsvpForm() {
 		setNameErrors(nameErrs);
 
 		const emailTrimmed = email.trim();
+
 		let emailErr = '';
-		if (emailTrimmed.length === 0) {
+
+		if (isAttending && emailTrimmed.length === 0) {
 			emailErr = 'Please enter your email address';
-		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrimmed)) {
+		} else if (isAttending && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrimmed)) {
 			emailErr = 'Please enter a valid email address';
 		}
 		setEmailError(emailErr);
@@ -77,7 +91,7 @@ export function RsvpForm() {
 			const res = await fetch('/api/rsvp', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ names, email: email.trim(), dietary }),
+				body: JSON.stringify({ names, email: email.trim(), dietary, isAttending }),
 			});
 			if (!res.ok) throw new Error('Submission failed');
 			setSubmitted(true);
@@ -96,10 +110,12 @@ export function RsvpForm() {
 		return (
 			<div className='text-center py-6'>
 				<Text className='font-playfair text-[1.5rem] text-brown mb-3'>
-					We&apos;ll see you there!
+					{isAttending ? `We'll see you there!` : "We'll miss you!"}
 				</Text>
 				<Text className='font-cormorant text-[1.1rem] italic text-brown-medium'>
-					Thank you for your RSVP. We look forward to celebrating with you.
+					{isAttending
+						? 'Thank you for your RSVP. We look forward to celebrating with you.'
+						: 'Thank you for your RSVP. We hope to see you soon.'}
 				</Text>
 				<Button
 					onClick={() => {
@@ -109,6 +125,7 @@ export function RsvpForm() {
 						setEmailError('');
 						setDietary('');
 						setNameErrors(['']);
+						setIsAttending(true);
 					}}
 					size='sm'
 					color='brown'
@@ -180,33 +197,58 @@ export function RsvpForm() {
 					</Button>
 				</div>
 
-				{/* Email */}
-				<TextInput
-					label='Email Address'
-					placeholder='your@email.com'
-					type='email'
-					size='md'
-					required
-					value={email}
-					onChange={(e) => {
-						setEmail(e.currentTarget.value);
-						setEmailError('');
-					}}
-					error={emailError || undefined}
-					styles={mantineInputStyles}
-				/>
+				<RadioGroup
+					label='Will you be attending?'
+					value={isAttending ? 'yes' : 'no'}
+					withAsterisk
+					classNames={{ root: isAttending ? '' : 'mb-6' }}>
+					<Group
+						mt='xs'
+						justify='center'>
+						<Radio
+							value='yes'
+							label={`Yes, ${names.length > 1 ? 'we' : 'I'} will be attending`}
+							onChange={() => setIsAttending(true)}
+						/>
+						<Radio
+							value='no'
+							label={`No, ${names.length > 1 ? 'we' : 'I'} will not be attending`}
+							onChange={() => setIsAttending(false)}
+						/>
+					</Group>
+				</RadioGroup>
 
-				{/* Dietary restrictions */}
-				<Textarea
-					label='Dietary Restrictions / Notes'
-					placeholder='Any allergies or dietary needs? (optional)'
-					size='md'
-					autosize
-					minRows={2}
-					styles={mantineInputStyles}
-					value={dietary}
-					onChange={(e) => setDietary(e.currentTarget.value)}
-				/>
+				{isAttending && (
+					<>
+						{/* Email */}
+						<TextInput
+							label='Email Address'
+							placeholder='your@email.com'
+							type='email'
+							size='md'
+							required
+							value={email}
+							onChange={(e) => {
+								setEmail(e.currentTarget.value);
+								setEmailError('');
+							}}
+							error={emailError || undefined}
+							styles={mantineInputStyles}
+						/>
+
+						{/* Dietary restrictions */}
+						<Textarea
+							label='Dietary Restrictions / Notes'
+							placeholder='Any allergies or dietary needs? (optional)'
+							size='md'
+							autosize
+							minRows={2}
+							styles={mantineInputStyles}
+							value={dietary}
+							onChange={(e) => setDietary(e.currentTarget.value)}
+						/>
+					</>
+				)}
 
 				<Button
 					type='submit'
@@ -214,7 +256,7 @@ export function RsvpForm() {
 					size='md'
 					color='brown'
 					disabled={!isFormValid}
-				className='font-playfair tracking-[0.12em] font-semibold'>
+					className='font-playfair tracking-[0.12em] font-semibold'>
 					SEND RSVP
 				</Button>
 			</Stack>
